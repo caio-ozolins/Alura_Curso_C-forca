@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+void cabecalho(){
+    printf("|*****************|\n");
+    printf("|* Jogo de Forca *|\n");
+    printf("|*****************|\n\n");
+}
+
 int main(){
 
     char palavraSecreta[20];
@@ -11,6 +17,8 @@ int main(){
     int acertou=0, enforcou=0;
     char chutes[26];
     int tentativas=0;
+
+    cabecalho();
 
     do {
 
