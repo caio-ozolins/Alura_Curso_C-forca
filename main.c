@@ -8,7 +8,7 @@ void cabecalho(){
     printf("|*****************|\n\n");
 }
 
-void chuta(){
+void chuta(char chutes[26], int tentativas){
     char chute;
     printf("Chute uma letra:");
     scanf(" %c", &chute);
@@ -49,7 +49,7 @@ int main(){
         }
         printf("\n");
 
-        chuta();
+        chuta(chutes, tentativas);
 
     } while (!acertou && !enforcou);
 
