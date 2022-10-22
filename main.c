@@ -4,7 +4,7 @@
 // variaveis globais
 char palavraSecreta[20];
 char chutes[26];
-int tentativas=0;
+int chutesDados=0;
 
 void cabecalho(){ // imprime o cabeçalho
     printf("|*****************|\n");
@@ -17,13 +17,13 @@ void chuta(){ //chute do jogador
     printf("Chute uma letra:");
     scanf(" %c", &chute);
 
-    chutes[tentativas] = chute;
-    tentativas++;
+    chutes[chutesDados] = chute;
+    chutesDados++;
 }
 
 int jaChutou(char letra){ // verifica se a letra já foi chutada
     int achou=0;
-    for (int j = 0; j < tentativas; j++) {
+    for (int j = 0; j < chutesDados; j++) {
         if (chutes[j] == letra){
             achou=1;
             break;
@@ -50,9 +50,9 @@ void escolhePalavra(){ // escolhe a palavra secreta
     sprintf(palavraSecreta, "MELANCIA");
 }
 
-int enforcou(){
+int enforcou(){ // verifica se o jogador foi "enforcado"
     int erros=0;
-    for (int i = 0; i < tentativas; ++i) {
+    for (int i = 0; i < chutesDados; ++i) {
         int existe = 0;
         for (int j = 0; j < strlen(palavraSecreta); ++j) {
             if (chutes[i] == palavraSecreta[j]){
