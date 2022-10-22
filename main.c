@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 void cabecalho(){
@@ -28,32 +27,38 @@ int jachutou(char letra, char chutes[26], int tentativas){
     return achou;
 }
 
+void desenhaForca(char palavraSecreta[20], char chutes[26], int tentativas){
+    for (int i = 0; i < strlen(palavraSecreta); i++) {
+
+        int achou = jachutou(palavraSecreta[i], chutes, tentativas);
+
+        if(achou){
+            printf("%c ", palavraSecreta[i]);
+        } else {
+            printf("_ ");
+        }
+    }
+    printf("\n");
+}
+
+void escolhePalavra(char palavraSecreta[20]){
+    sprintf(palavraSecreta, "MELANCIA");
+}
+
 int main(){
 
     char palavraSecreta[20];
-
-    sprintf(palavraSecreta, "MELANCIA");
-
     int acertou=0, enforcou=0;
     char chutes[26];
     int tentativas=0;
+
+    escolhePalavra(palavraSecreta);
 
     cabecalho();
 
     do {
 
-        // imprime a palavra secreta
-        for (int i = 0; i < strlen(palavraSecreta); i++) {
-
-            int achou = jachutou(palavraSecreta[i], chutes, tentativas);
-
-            if(achou){
-                printf("%c ", palavraSecreta[i]);
-            } else {
-                printf("_ ");
-            }
-        }
-        printf("\n");
+        desenhaForca(palavraSecreta, chutes, tentativas);
 
         chuta(chutes, &tentativas);
 
