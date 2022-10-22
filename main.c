@@ -65,9 +65,16 @@ int enforcou(){ // verifica se o jogador foi "enforcado"
     return erros >= 5;
 }
 
-int main(){
+int acertou(){
+    for (int i = 0; i < strlen(palavraSecreta); ++i) {
+        if (!jaChutou(palavraSecreta[i])){
+            return 0;
+        }
+    }
+    return 1;
+}
 
-    int acertou=0;
+int main(){
 
     escolhePalavra();
     cabecalho();
@@ -77,7 +84,7 @@ int main(){
         desenhaForca();
         chuta();
 
-    } while (!acertou && !enforcou());
+    } while (!acertou() && !enforcou());
 
     return 0;
 }
