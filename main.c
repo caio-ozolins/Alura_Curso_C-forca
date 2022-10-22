@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include "forca.h"
 
 // variaveis globais
 char palavraSecreta[20];
@@ -55,7 +56,8 @@ int enforcou(){ // verifica se o jogador foi "enforcado"
     for (int i = 0; i < chutesDados; ++i) {
         int existe = 0;
         for (int j = 0; j < strlen(palavraSecreta); ++j) {
-            if (chutes[i] == palavraSecreta[j]){
+            //if (chutes[i] == palavraSecreta[j]){
+            if (jaChutou(palavraSecreta[i])){
                 existe = 1;
                 break;
             }
