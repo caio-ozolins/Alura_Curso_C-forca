@@ -1,5 +1,7 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+#include <time.h>
 #include "forca.h"
 
 // variaveis globais
@@ -48,7 +50,26 @@ void desenhaForca(){ // imprime a palavra secreta
 }
 
 void escolhePalavra(){ // escolhe a palavra secreta
-    sprintf(palavraSecreta, "MELANCIA");
+    FILE * file;
+    file = fopen("..\\palavras.txt", "r");
+
+    if(file == 0) {
+        printf("Banco de dados de palavras não disponível\n\n");
+        exit(1);
+    }
+
+    int qtdPalavras;
+
+    fscanf(file, "%d", &qtdPalavras);
+
+    srand(time(0));
+    int numRand = rand() % qtdPalavras;
+
+    for (int i = 0; i <= numRand; i++) {
+        fscanf(file, "%s", palavraSecreta);
+    }
+
+    fclose(file);
 }
 
 int enforcou(){ // verifica se o jogador foi "enforcado"
@@ -56,8 +77,7 @@ int enforcou(){ // verifica se o jogador foi "enforcado"
     for (int i = 0; i < chutesDados; ++i) {
         int existe = 0;
         for (int j = 0; j < strlen(palavraSecreta); ++j) {
-            //if (chutes[i] == palavraSecreta[j]){
-            if (jaChutou(palavraSecreta[i])){
+            if (chutes[i] == palavraSecreta[j]){
                 existe = 1;
                 break;
             }
