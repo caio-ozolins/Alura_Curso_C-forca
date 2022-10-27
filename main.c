@@ -49,27 +49,63 @@ void desenhaForca(){ // imprime a palavra secreta
     printf("\n");
 }
 
-void escolhePalavra(){ // escolhe a palavra secreta
-    FILE * file;
-    file = fopen("..\\palavras.txt", "r");
+void adicionaPalavra(){
+    char quer;
 
-    if(file == 0) {
+    printf("Voce deseja asicionar uma nova palavra? (S/N)");
+    scanf(" %c", &quer);
+
+    if (quer =='S'){
+
+        char novaPalavra[20];
+        printf("Qual a nova palavra?");
+        scanf("%s", novaPalavra);
+
+        FILE* f;
+
+        f = fopen("..\\palavras.txt", "r+");
+
+        if(f == 0) {
+            printf("Banco de dados de palavras não disponível\n\n");
+            exit(1);
+        }
+
+        int qtd;
+        fscanf(f, "%d", &qtd);
+        qtd++;
+
+        fseek(f, 0, SEEK_SET);
+        fprintf(f, "%d", qtd);
+
+        fseek(f, 0, SEEK_END);
+
+        fprintf(f, "\n%s", novaPalavra);
+
+        fclose(f);
+    }
+}
+
+void escolhePalavra(){ // escolhe a palavra secreta
+    FILE * f;
+    f = fopen("..\\palavras.txt", "r");
+
+    if(f == 0) {
         printf("Banco de dados de palavras não disponível\n\n");
         exit(1);
     }
 
     int qtdPalavras;
 
-    fscanf(file, "%d", &qtdPalavras);
+    fscanf(f, "%d", &qtdPalavras);
 
     srand(time(0));
     int numRand = rand() % qtdPalavras;
 
     for (int i = 0; i <= numRand; i++) {
-        fscanf(file, "%s", palavraSecreta);
+        fscanf(f, "%s", palavraSecreta);
     }
 
-    fclose(file);
+    fclose(f);
 }
 
 int enforcou(){ // verifica se o jogador foi "enforcado"
@@ -107,6 +143,8 @@ int main(){
         chuta();
 
     } while (!acertou() && !enforcou());
+
+    adicionaPalavra();
 
     return 0;
 }

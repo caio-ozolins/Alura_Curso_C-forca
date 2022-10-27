@@ -8,5 +8,6 @@ void desenhaForca();
 void escolhePalavra();
 int enforcou();
 int acertou();
+void adicionaPalavra();
 
 #endif //FORCA_FORCA_H
